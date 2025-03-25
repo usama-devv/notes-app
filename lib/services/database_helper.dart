@@ -1,6 +1,8 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../model/notes_model.dart';
+
 class DatabaseHelper{
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   static Database? _database;
@@ -33,5 +35,35 @@ class DatabaseHelper{
         dateTime TEXT
         )
       ''');
+  }
+
+  Future<int> insertNote(Note note) async{
+    final db = await database;
+    return await db.insert('Notes', note.toMap());
+  }
+
+  Future<List<Note>> getNotes() async{
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('notes');
+    return List.generate(maps.length, (i) => Note.fromMap(maps[i]));
+  }
+
+  Future<int> updateNote(Note note) async{
+    final db = await database;
+    return await db.update(
+      'Notes',
+      note.toMap(),
+      where: 'id : ?',
+      whereArgs: [note.id],
+    );
+  }
+
+  Future<int> deleteNote(int id) async{
+    final db = await database;
+    return await db.delete(
+      'Notes',
+      where: 'id : ?',
+      whereArgs: [id],
+    );
   }
 }
