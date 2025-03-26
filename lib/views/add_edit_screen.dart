@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/services/database_helper.dart';
+import 'package:notes_app/views/home_screen.dart';
 
 import '../model/notes_model.dart';
 
@@ -125,7 +126,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
                     InkWell(
                       onTap: () {
                         _saveNote();
-                        Get.back();
+                        Get.to(() => HomeScreen());
                       },
                       child: Container(
                         margin: EdgeInsets.all(20),

@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return GestureDetector(
             onTap: () async {
-              // Get.to(() => ViewNoteScreen(note: note));
+               Get.to(() => ViewNoteScreen(note: note));
               _loadNotes();
             },
             child: Container(

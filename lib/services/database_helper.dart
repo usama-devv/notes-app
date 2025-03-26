@@ -53,7 +53,7 @@ class DatabaseHelper{
     return await db.update(
       'Notes',
       note.toMap(),
-      where: 'id : ?',
+      where: 'id = ?',
       whereArgs: [note.id],
     );
   }
@@ -62,7 +62,7 @@ class DatabaseHelper{
     final db = await database;
     return await db.delete(
       'Notes',
-      where: 'id : ?',
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
